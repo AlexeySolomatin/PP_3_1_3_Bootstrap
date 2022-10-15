@@ -41,11 +41,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    public void update(int id, User upUser) {
-        entityManager.merge(upUser);
-        getUser(id).setPassword(passwordEncoder.encode(upUser.getPassword()));
-        if (upUser.getRole() != null) {
-            getUser(id).setRoles(listRoles(upUser));
+    public void update(int id, User updateUser) {
+        entityManager.merge(updateUser);
+        getUser(id).setPassword(passwordEncoder.encode(updateUser.getPassword()));
+        if (updateUser.getRole() != null) {
+            getUser(id).setRoles(listRoles(updateUser));
         }
     }
 

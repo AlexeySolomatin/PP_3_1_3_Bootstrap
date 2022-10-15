@@ -9,6 +9,6 @@ public interface UserDAO {
     User getUser(int id);
     User getUserByEmail(String email);
     void save(User user);
-    void update(int id, User upUser);
+    void update(int id, User updateUser);
     void delete(int id);
 }
