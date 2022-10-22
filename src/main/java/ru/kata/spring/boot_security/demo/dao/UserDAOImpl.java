@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -42,8 +43,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public void update(int id, User updateUser) {
+        String oldPassword = getUser(id).getPassword();
         entityManager.merge(updateUser);
-        getUser(id).setPassword(passwordEncoder.encode(updateUser.getPassword()));
+        String newPassword = updateUser.getPassword();
+        if(!Objects.equals(oldPassword, newPassword)) {
+            getUser(id).setPassword(passwordEncoder.encode(newPassword));
+        }
         if (updateUser.getRole() != null) {
             getUser(id).setRoles(listRoles(updateUser));
         }
