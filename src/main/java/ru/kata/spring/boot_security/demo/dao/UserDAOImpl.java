@@ -46,9 +46,9 @@ public class UserDAOImpl implements UserDAO {
         String oldPassword = getUser(id).getPassword();
         entityManager.merge(user);
         String newPassword = user.getPassword();
-        if(!Objects.equals(oldPassword, newPassword)) {
-            getUser(id).setPassword(passwordEncoder.encode(newPassword));
-        }
+        if(Objects.equals(oldPassword, newPassword) || newPassword.isEmpty()) {
+            getUser(id).setPassword(oldPassword);
+        } else getUser(id).setPassword(passwordEncoder.encode(newPassword));
         if (user.getRole() != null) {
             getUser(id).setRoles(listRoles(user));
         }
