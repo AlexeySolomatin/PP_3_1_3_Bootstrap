@@ -155,9 +155,12 @@
                                                                                     <label>Role</label>
                                                                                     <select multiple class="form-control form-control-sm"
                                                                                             name="role" th:value="*{user.role}" size="2" required>
-                                                                                        <option>ADMIN</option>
-                                                                                        <option>USER</option>
+                                                                                        <option th:if="${user.getRole().contains('ADMIN')}" selected>ADMIN</option>
+                                                                                        <option th:if="${!(user.getRole().contains('ADMIN'))}">ADMIN</option>
+                                                                                        <option th:if="${user.getRole().contains('USER')}" selected>USER</option>
+                                                                                        <option th:if="${!(user.getRole().contains('USER'))}">USER</option>
                                                                                     </select>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
